@@ -6,24 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>iPhone Mockup</title>
     <script src="/tailwind.js"></script>
-    <script id="frame-config-iphone" type="application/json">
-        {
-            "width": 1283,
-            "height": 2778,
-            "imageUri": "/test-out.png"
-        }
-    </script>
 
-    <script id="frame-config-ipad" type="application/json">
-        {
-            "width": 2048,
-            "height": 2732,
-            "imageUri": "/test-out-2.png"
-        }
-    </script>
     <script>
         const isCaptureMode = new URLSearchParams(window.location.search).get("capture") === "1";
-        const configName = new URLSearchParams(window.location.search).get("configName") ?? "frame-config-iphone";
         const jsonConfig = new URLSearchParams(window.location.search).get("config") ?? "";
         try {
             console.log(JSON.parse(jsonConfig));
@@ -32,13 +17,9 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            const configScript = document.getElementById(configName);
             const framed = document.getElementById("framed");
 
             let frameConfig;
-            if (configScript) {
-                frameConfig = JSON.parse(configScript.textContent);
-            }
 
             if (jsonConfig) {
                 frameConfig = JSON.parse(jsonConfig);

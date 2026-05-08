@@ -1,6 +1,8 @@
 # iosscreenshotmaker
 
-Create polished iOS App Store screenshots from simulator captures.
+Create media from ios simulator captures and html based templates.
+- screenshot for the appstore
+- videos for social media
 
 ## Prerequisites
 - Works on mac
