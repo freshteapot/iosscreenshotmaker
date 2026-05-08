@@ -36,7 +36,10 @@ xcrun simctl io booted screenshot "$PWD/example/play-along/screenshot.png"
 
 ## Frame it
 ```sh
-./iosscreenshotmaker frame-screenshot --frame "frames/iPhone Air - Cloud White - Portrait.png" --input "example/play-along/screenshot.png" --output "example/play-along/framed.png"
+./iosscreenshotmaker frame-screenshot \
+--frame "frames/iPhone Air - Cloud White - Portrait.png" \
+--input "example/play-along/screenshot.png" \
+--output "example/play-along/framed.png"
 ```
 
 ## Add frame to template
@@ -63,7 +66,10 @@ jq -n \
         title_color: $title_color,
         screenshot_bg_color: $screenshot_bg_color
     }
-}' | ./iosscreenshotmaker create-app-store-screenshot --chrome="/Applications/Chromium.app/Contents/MacOS/Chromium" --device="iphone" --server-dir "example/www"
+}' | ./iosscreenshotmaker create-app-store-screenshot \
+--chrome="/Applications/Chromium.app/Contents/MacOS/Chromium" \
+--device="iphone" \
+--server-dir "example/www"
 ```
 
 ### Open the debug view
