@@ -73,8 +73,9 @@ open_url: http://127.0.0.1:8080/index.html?capture=0&config=%7B%22height%22%3A27
 ```
 
 - if you open the url, in your browser, you will see your image + the template
-- the template is html + css (tailwind), look in example/www/index.html
+- the template is html + css (tailwind), look in [example/www/index.html](example/www/index.html)
 
 
 # Reference
 - https://github.com/ungoogled-software/ungoogled-chromium#downloads
+- https://tailwindcss.com/
