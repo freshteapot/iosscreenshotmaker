@@ -48,7 +48,7 @@ xcrun simctl io booted screenshot "$PWD/example/play-along/screenshot.png"
 ### Start the web server
 - We use this to render the image in the template
 ```sh
-./iosscreenshotmaker  server ./example/www
+./iosscreenshotmaker server ./example/www
 ```
 
 ### Add frame to template
