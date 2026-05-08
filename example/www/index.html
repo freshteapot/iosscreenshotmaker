@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iPhone Mockup</title>
+    <script src="/tailwind.js"></script>
+    <script id="frame-config-iphone" type="application/json">
+        {
+            "width": 1283,
+            "height": 2778,
+            "imageUri": "/test-out.png"
+        }
+    </script>
+
+    <script id="frame-config-ipad" type="application/json">
+        {
+            "width": 2048,
+            "height": 2732,
+            "imageUri": "/test-out-2.png"
+        }
+    </script>
+    <script>
+        const isCaptureMode = new URLSearchParams(window.location.search).get("capture") === "1";
+        const configName = new URLSearchParams(window.location.search).get("configName") ?? "frame-config-iphone";
+        const jsonConfig = new URLSearchParams(window.location.search).get("config") ?? "";
+        try {
+            console.log(JSON.parse(jsonConfig));
+        } catch (e) {
+            console.error(e);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const configScript = document.getElementById(configName);
+            const framed = document.getElementById("framed");
+
+            let frameConfig;
+            if (configScript) {
+                frameConfig = JSON.parse(configScript.textContent);
+            }
+
+            if (jsonConfig) {
+                frameConfig = JSON.parse(jsonConfig);
+
+                if (frameConfig?.template?.title) {
+                    document.getElementById("title").innerText = frameConfig.template.title;
+                }
+
+                if (frameConfig?.template?.title_color) {
+                    const className = `text-[${frameConfig?.template?.title_color}]`
+                    document.getElementById("title")?.classList.add(className);
+                }
+
+
+                if (frameConfig?.template?.screenshot_bg_color) {
+                    console.log(`bg-[${frameConfig?.template?.screenshot_bg_color}]`);
+                    const className = `bg-[${frameConfig?.template?.screenshot_bg_color}]`
+                    document.getElementById("framed")?.classList.add(className);
+                }
+            }
+
+            if (frameConfig && framed) {
+                framed.dataset.width = String(frameConfig.width);
+                framed.dataset.height = String(frameConfig.height);
+                framed.style.width = `${frameConfig.width}px`;
+                framed.style.height = `${frameConfig.height}px`;
+
+                const screenshotImage = document.getElementById("frame-image");
+                if (screenshotImage && frameConfig.imageUri) {
+                    screenshotImage.src = frameConfig.imageUri;
+                }
+            }
+
+            if (!isCaptureMode) return;
+
+            document.body.classList.remove("p-8");
+            document.body.classList.add("bg-transparent", "p-0", "justify-start");
+
+            const preview = document.getElementById("preview-scale");
+            if (preview) {
+                preview.classList.add("scale-100", "border-0");
+            }
+
+
+        });
+    </script>
+</head>
+
+<body class="bg-gray-200 min-h-screen flex items-start justify-center p-8">
+    <div id="preview-scale" class="origin-top scale-[0.25] border-8 border-red-500 p-0">
+        <div id="framed" class="relative bg-[#f7f6f2ff]">
+
+            <div class="flex h-full flex-col">
+                <div class="h-[200px] shrink-0"></div>
+                <h1 id="title"
+                    class="m-0 text-center text-[88px] font-black leading-[0.95] tracking-[-0.03em] text-slate-900">
+                    TITLE GOES HERE
+                </h1>
+
+                <div class="h-[150px] shrink-0"></div>
+
+                <div class="px-[10px]">
+                    <div id="divider" class="w-full h-[1.5px] rounded-full bg-[#999999ff]"></div>
+                </div>
+                <div class="h-[100px] shrink-0"></div>
+
+                <div class="relative flex justify-center">
+                    <img id="frame-image" src="" class="block w-[80%]" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
